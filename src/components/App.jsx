@@ -1,11 +1,12 @@
 class App extends React.Component { 
   constructor(props) {
-    super(props)
-    this.state = {videos: window.exampleVideoData, currentVideo: window.exampleVideoData[0]};
+    super(props);
+    this.state = {videos: props.videos, currentVideo: props.videos[0]};
   }
   select(video) {
-    (() => { console.log("inside: ", this); this.setState({currentVideo: video})})();
-    console.log("outside: ", this);
+    (() => {
+      this.setState({currentVideo: video});
+    }) (); // instant invocation
   }
   render() {
 
@@ -25,7 +26,7 @@ class App extends React.Component {
           </div>
         </div>
       </div>
-    )
+    );
   }
 }
 

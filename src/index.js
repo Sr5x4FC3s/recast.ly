@@ -1,3 +1,6 @@
 // TODO: Render the `App` component to the DOM
 
-ReactDOM.render(<App />, document.getElementById('app'));
+window.videos = window.searchYouTube({}, (videos) => {
+  ReactDOM.render(<App videos={videos}/>, document.getElementById('app'));
+});
+
