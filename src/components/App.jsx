@@ -3,10 +3,6 @@ class App extends React.Component {
     super(props);
     
     this.state = {videos: window.exampleVideoData, currentVideo: window.exampleVideoData[0]};
-    this.props.searchYouTube({}, (videos)=>{
-      this.setState({videos: videos});
-      this.setState({currentVideo: this.state.videos[0]});
-    });
     
   }
   select(video) {
@@ -14,18 +10,33 @@ class App extends React.Component {
       this.setState({currentVideo: video});
     }) (); // instant invocation
   }
+  search(query) {
+    console.log('search', query);
+    this.props.searchYouTube({query: query}, (videos)=>{
+      this.setState({videos: videos});
+      this.setState({currentVideo: this.state.videos[0]});
+    });
+  }
+
+  componentDidMount() {
+    this.props.searchYouTube({}, (videos)=>{
+      this.setState({videos: videos});
+      this.setState({currentVideo: this.state.videos[0]});
+    });
+  }
+
   render() {
 
     return (
       <div>
         <nav className="navbar">
           <div className="col-md-6 offset-md-3">
-            <Search><h5><em>search</em> view goes here</h5></Search>
+            <Search search={this.search.bind(this)}/>
           </div>
         </nav>
         <div className="row">
           <div className="col-md-7">
-            <VideoPlayer video={this.state.currentVideo}><h5><em>videoPlayer</em> view goes here</h5></VideoPlayer>
+            <VideoPlayer video={this.state.currentVideo} />
           </div>
           <div className="col-md-5">
             <VideoList videos={this.state.videos} select={this.select.bind(this)}/>
