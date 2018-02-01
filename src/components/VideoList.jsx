@@ -1,12 +1,18 @@
-var VideoList = () => (
-  <div className="video-list">
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-    <div><h5><em>videoListEntry</em> view goes here</h5></div>
-  </div>
-);
+class VideoList extends React.Component {
+  constructor (props) {
+    super(props)
+    // this.props.callback = (title) => {console.log('title')}
+  }
+  render() {
+
+    return (
+      <div className="video-list"> 
+        {console.log(this.props)}
+        {this.props.videos.map(video => (<VideoListEntry video={video} key={video.id.videoId} select={this.props.select.bind(this)}/>))}
+      </div>
+    );
+  }
+}
 
 // PropTypes tell other developers what `props` a component expects
 // Warnings will be shown in the console when the defined rules are violated
