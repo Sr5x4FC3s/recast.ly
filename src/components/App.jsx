@@ -1,7 +1,13 @@
 class App extends React.Component { 
   constructor(props) {
     super(props);
-    this.state = {videos: props.videos, currentVideo: props.videos[0]};
+    
+    this.state = {videos: window.exampleVideoData, currentVideo: window.exampleVideoData[0]};
+    this.props.searchYouTube({}, (videos)=>{
+      this.setState({videos: videos});
+      this.setState({currentVideo: this.state.videos[0]});
+    });
+    
   }
   select(video) {
     (() => {

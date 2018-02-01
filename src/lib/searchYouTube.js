@@ -3,10 +3,10 @@ var searchYouTube = (options, callback) => {
   $.ajax({
     type: 'GET',
     data: {
-      q: '',
-      key: window.YOUTUBE_API_KEY,
+      q: options.query ? options.query : ' ',
+      key: options.key ? options.key : window.YOUTUBE_API_KEY,
       part: 'snippet',
-      maxResults: 5
+      maxResults: options.max ? options.max : 5
     }, 
     url: 'https://www.googleapis.com/youtube/v3/search',
     success: (data) => {
